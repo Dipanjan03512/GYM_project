@@ -1,0 +1,65 @@
+<%- include('../includes/header', { title: 'Dashboard' }) %>
+
+<div class="container">
+  <h1 class="dashboard-title">Dashboard</h1>
+
+  <h2 class="section-title">Prices</h2>
+  <table class="dashboard-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% prices.forEach(price => { %>
+      <tr>
+        <td><%= price.type %></td>
+        <td><%= price.amount %></td>
+        <td>
+          <img src="/uploads/<%= price.image %>" alt="Price Image" class="dashboard-image"/>
+        </td>
+        <td>
+          <a href="/admin/editPrices/<%= price._id %>" class="btn btn-edit">Edit</a>
+          <form action="/admin/deletePrice/<%= price._id %>" method="POST" class="inline-form">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+  <h2 class="section-title">Trainers</h2>
+  <table class="dashboard-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Specialty</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% trainers.forEach(trainer => { %>
+      <tr>
+        <td><%= trainer.name %></td>
+        <td><%= trainer.specialty %></td>
+        <td>
+          <img src="/uploads/<%= trainer.image %>" alt="Trainer Image" class="dashboard-image"/>
+        </td>
+        <td>
+          <a href="/admin/editTrainer/<%= trainer._id %>" class="btn btn-edit">Edit</a>
+          <form action="/admin/deleteTrainer/<%= trainer._id %>" method="POST" class="inline-form">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>
+
+<%- include('../includes/footer') %>

@@ -1,4 +1,3 @@
-<header>
     <div class="container">
         <nav class="navbar">
             <a href="/" class="navbar-brand">
@@ -14,8 +13,16 @@
                 </ul>
             </div>
             <div class="navbar-auth">
-                <a href="/login-register" class="btn btn-primary">Sign In/Sign Up</a>
+                <% if (user) { %>
+                    <div class="navbar-buttons">
+                        <a href="/cart" class="btn btn-cart">
+                            <i class="fas fa-shopping-cart"></i> Cart
+                        </a>
+                        <a href="/logout" class="btn btn-primary">Sign Out</a>
+                    </div>
+                <% } else { %>
+                    <a href="/login-register" class="btn btn-primary">Sign In/Sign Up</a>
+                <% } %>
             </div>
         </nav>
     </div>
-</header>

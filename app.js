@@ -6,6 +6,8 @@ const passport = require('passport');
 const connectDB = require('./config/db');
 const path = require('path');
 const app = express();
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 
 // Load environment variables
 require('dotenv').config();
@@ -17,8 +19,10 @@ connectDB();
 require('./config/passport')(passport);
 
 // Body parser middleware
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 
 // Express session
 app.use(
@@ -32,6 +36,7 @@ app.use(
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 // Connect flash
 app.use(flash());
@@ -47,6 +52,8 @@ app.use((req, res, next) => {
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Set view engine
 app.set('view engine', 'ejs');

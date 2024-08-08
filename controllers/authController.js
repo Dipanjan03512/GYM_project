@@ -24,32 +24,30 @@ exports.getLoginRegisterPage = (req, res) => {
 
 // Register user
 exports.register = async (req, res) => {
-  console.log("The value collected from registration form:", req.body);
-  let errors = [];
-
-  // Validate input
-  if (!req.body.name || !req.body.email || !req.body.password) {
-    errors.push({ msg: "Please enter all fields" });
-  }
-
-  if (req.body.password.length < 6) {
-    errors.push({ msg: "Password must be at least 6 characters" });
-  }
-
-  if (errors.length > 0) {
-    return res.render("pages/login-register", {
-      title: "Login/Register",
-      errors,
-      name: req.body.name,
-      email: req.body.email,
-      password: req.body.password,
-    });
-  }
-
   try {
-    const user = await User.findOne({ email: req.body.email });
-    console.log("User details:", user);
+    console.log("The value collected from registration form:", req.body);
+    let errors = [];
 
+    // Validate input
+    if (!req.body.name || !req.body.email || !req.body.password) {
+      errors.push({ msg: "Please enter all fields" });
+    }
+
+    if (req.body.password.length < 6) {
+      errors.push({ msg: "Password must be at least 6 characters" });
+    }
+
+    if (errors.length > 0) {
+      return res.render("pages/login-register", {
+        title: "Login/Register",
+        errors,
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+      });
+    }
+
+    const user = await User.findOne({ email: req.body.email });
     if (user) {
       errors.push({ msg: "Email already exists" });
       return res.render("pages/login-register", {
@@ -62,7 +60,6 @@ exports.register = async (req, res) => {
     }
 
     const hashPassword = await bcrypt.hash(req.body.password, 10);
-    // console.log("Generated hash password:", hashPassword);
 
     const newUser = new User({
       name: req.body.name,
@@ -71,11 +68,13 @@ exports.register = async (req, res) => {
     });
 
     const savedUser = await newUser.save();
-    console.log("User data has been saved:", savedUser);
 
-    const jwtToken = jwt.sign({ email: savedUser.email }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
-    });
+    // Generate JWT token for email verification
+    const jwtToken = jwt.sign(
+      { email: savedUser.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
 
     const tokenData = new TokenModel({
       token: jwtToken,
@@ -84,6 +83,7 @@ exports.register = async (req, res) => {
 
     await tokenData.save();
 
+    // Send verification email
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: req.body.email,
@@ -123,7 +123,10 @@ exports.login = (req, res, next) => {
 // Logout user
 exports.logout = (req, res, next) => {
   req.logout((err) => {
-    if (err) return next(err);
+    if (err) {
+      console.error("Error logging out:", err);
+      return next(err);
+    }
     req.flash("success_msg", "You are logged out");
     res.redirect("/auth/login-register");
   });
