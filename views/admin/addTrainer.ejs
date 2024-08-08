@@ -1,0 +1,26 @@
+<%- include('../includes/header', { title: 'Add Trainer' }) %>
+
+<div class="container">
+    <h1>Add Trainer</h1>
+    <form action="/admin/add-trainer" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+            <label for="specialty">Specialty:</label>
+            <input type="text" id="specialty" name="specialty" required>
+        </div>
+        <div>
+            <label for="bio">Bio:</label>
+            <textarea id="bio" name="bio" required></textarea>
+        </div>
+        <div>
+            <label for="photo">Photo:</label>
+            <input type="file" id="photo" name="photo" required>
+        </div>
+        <button type="submit" class="btn">Add Trainer</button>
+    </form>
+</div>
+
+<%- include('../includes/footer') %>

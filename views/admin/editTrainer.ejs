@@ -1,0 +1,26 @@
+<%- include('../includes/header', { title: 'Edit Trainer' }) %>
+
+<div class="container">
+    <h1>Edit Trainer</h1>
+    <form action="/admin/edit-trainer/<%= trainer._id %>" method="POST" enctype="multipart/form-data">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="<%= trainer.name %>" required>
+        </div>
+        <div>
+            <label for="specialty">Specialty:</label>
+            <input type="text" id="specialty" name="specialty" value="<%= trainer.specialty %>" required>
+        </div>
+        <div>
+            <label for="bio">Bio:</label>
+            <textarea id="bio" name="bio" required><%= trainer.bio %></textarea>
+        </div>
+        <div>
+            <label for="photo">Photo:</label>
+            <input type="file" id="photo" name="photo">
+        </div>
+        <button type="submit" class="btn">Update Trainer</button>
+    </form>
+</div>
+
+<%- include('../includes/footer') %>

@@ -1,0 +1,36 @@
+<%- include('../includes/header', { title: 'Login/Register' }) %>
+
+    <div class="wrapper">
+        <div class="card-switch">
+            <label class="switch">
+                <input type="checkbox" class="toggle">
+                <span class="slider"></span>
+                <span class="card-side"></span>
+                <div class="flip-card__inner">
+                    <!-- Login Form -->
+                    <div class="flip-card__front">
+                        <div class="title">Log in</div>
+                        <form class="flip-card__form" action="/auth/login" method="POST">
+                          
+                            <input class="flip-card__input" name="email" placeholder="Email" type="email" required>
+                            <input class="flip-card__input" name="password" placeholder="Password" type="password" required>
+                            <button class="flip-card__btn" type="submit">Let’s go!</button>
+                        </form>
+                    </div>
+                    <!-- Register Form -->
+                    <div class="flip-card__back">
+                        <div class="title">Sign up</div>
+                        <form class="flip-card__form" action="/auth/register" method="POST">
+                            
+                            <input class="flip-card__input" name="name" placeholder="Name" type="text" required>
+                            <input class="flip-card__input" name="email" placeholder="Email" type="email" required>
+                            <input class="flip-card__input" name="password" placeholder="Password" type="password" required>
+                            <button class="flip-card__btn" type="submit">Confirm!</button>
+                        </form>
+                    </div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <%- include('../includes/footer') %>

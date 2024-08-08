@@ -1,0 +1,22 @@
+<%- include('../includes.header', { title: 'Edit Prices' }) %>
+
+<div class="container">
+    <h1>Edit Membership Plan</h1>
+    <form action="/admin/edit-prices/<%= price._id %>" method="POST">
+        <div>
+            <label for="plan">Plan Name:</label>
+            <input type="text" id="plan" name="plan" value="<%= price.plan %>" required>
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required><%= price.description %></textarea>
+        </div>
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" value="<%= price.price %>" required>
+        </div>
+        <button type="submit" class="btn">Update Plan</button>
+    </form>
+</div>
+
+<%- include('../includes/footer') %>
