@@ -1,9 +1,60 @@
 <%- include('../includes/header', { title: 'About Us' }) %>
 
 <main>
-    <div class="container">
-        <h1>About Us</h1>
-    </div>
+    <section class="about-container">
+        <div class="about-content">
+            <h1 class="about-title">About Us</h1>
+            <p class="about-description">
+                Welcome to Bajrang Fitness, the premier destination for achieving your fitness goals and living a healthier life. 
+                Founded with the mission to inspire and support individuals on their fitness journey, we offer state-of-the-art gym 
+                facilities designed to cater to all levels of fitness enthusiasts. Whether you're a beginner or a seasoned athlete, 
+                our gym is equipped with the latest exercise machines, free weights, and functional training areas to help you 
+                maximize your workouts.
+            </p>
+            <p class="about-description">
+                Our team of certified trainers and nutrition experts are dedicated to providing personalized guidance and support. 
+                From one-on-one personal training sessions to group classes, we offer a variety of programs tailored to meet your 
+                specific needs and preferences. Our trainers are not only skilled but passionate about helping you reach your 
+                fitness goals, and they are always available to answer your questions and provide motivation.
+            </p>
+            <p class="about-description">
+                At Bajrang Fitness, we also understand the importance of a balanced diet in achieving fitness success. Our in-house 
+                nutritionists work closely with our members to create customized meal plans that complement their training routines. 
+                We believe in a holistic approach to fitness that encompasses both physical exercise and proper nutrition.
+            </p>
+            <p class="about-description">
+                Our facility features a variety of amenities to enhance your gym experience, including:
+            </p>
+            <ul class="about-list">
+                <li>Modern cardio and strength training equipment</li>
+                <li>Dedicated functional training zones</li>
+                <li>Refreshing locker rooms with showers</li>
+                <li>Wellness and relaxation areas</li>
+                <li>Nutrition and supplement shop</li>
+                <li>Friendly and supportive community atmosphere</li>
+            </ul>
+            <p class="about-description">
+                We are committed to creating a positive and empowering environment where everyone feels welcome and inspired. 
+                Join us at Bajrang Fitness and take the first step towards a healthier, happier you!
+            </p>
+
+            <!-- Trainers Section -->
+            <section class="trainers-section">
+                <h2 class="trainers-title">Meet Our Trainers</h2>
+                <div class="trainers-container">
+                    <% trainers.forEach(trainer => { %>
+                        <div class="trainer-card">
+                            <img src="/uploads/<%= trainer.image %>" alt="<%= trainer.name %>" class="trainer-photo">
+                            <div class="trainer-info">
+                                <h3 class="trainer-name"><%= trainer.name %></h3>
+                                <p class="trainer-specialty"><%= trainer.specialty %></p>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            </section>
+        </div>
+    </section>
 </main>
 
 <%- include('../includes/footer') %>

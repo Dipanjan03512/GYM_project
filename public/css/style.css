@@ -502,3 +502,385 @@ h1, p {
     display: inline;
     margin: 0;
 }
+
+
+/* CSS for Add Prices page */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.form-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.form-input:focus {
+    border-color: #7abf5a;
+    outline: none;
+    box-shadow: 0 0 5px rgba(122, 191, 90, 0.5);
+}
+
+.form-btn {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.form-btn:hover {
+    background-color: #14441e;
+}
+/* Container for the card views */
+.trainers-container, .prices-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Style for each trainer card or price card */
+.trainer-card, .price-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 300px;
+    text-align: center;
+    position: relative;
+    padding: 20px;
+    margin: 10px;
+}
+
+.trainer-card:hover, .price-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Style for images in the card */
+.trainer-photo, .price-image {
+    width: 100%;
+    height: auto;
+    border-bottom: 2px solid #eee;
+    transition: transform 0.3s ease;
+}
+
+.trainer-card:hover .trainer-photo, .price-card:hover .price-image {
+    transform: scale(1.05);
+}
+
+/* Style for card content */
+.trainer-info, .price-info {
+    padding: 10px 0;
+}
+
+/* Style for headings and text inside the card */
+.trainer-info h3, .price-info h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.trainer-info p, .price-info p {
+    color: #666;
+}
+
+/* Button or link inside the card */
+.trainer-info a, .price-info a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.trainer-info a:hover, .price-info a:hover {
+    background-color: #218838;
+}
+/* General styling for the About Us page */
+.about-container {
+    padding: 40px;
+    background-color: #f4f4f4;
+}
+
+.about-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-title {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInUp 1s forwards;
+}
+
+.about-description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #555;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInUp 1.5s forwards;
+}
+
+.about-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    text-align: left;
+    display: inline-block;
+}
+
+.about-list li {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 10px 0;
+    position: relative;
+    padding-left: 20px;
+}
+
+.about-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: #2ecc71;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* Trainers Section */
+.trainers-section {
+    padding: 40px 0;
+    background-color: #fff;
+}
+
+.trainers-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInUp 1s forwards;
+}
+
+.trainers-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.trainer-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trainer-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.trainer-photo {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-bottom: 2px solid #2ecc71;
+}
+
+.trainer-info {
+    padding: 15px;
+}
+
+.trainer-name {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #333;
+}
+
+.trainer-specialty {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.contact-section {
+    padding: 50px 0;
+    background: #f4f4f4;
+}
+
+.contact-section h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 2.5em;
+}
+
+.contact-section p {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.2em;
+    color: #666;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.contact-details, .contact-form {
+    flex: 1;
+    background: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-details:hover, .contact-form:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.contact-details h2, .contact-form h2 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 1.8em;
+}
+
+.contact-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-details li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    color: #666;
+}
+
+.contact-details i {
+    color: #4CAF50;
+    margin-right: 10px;
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 1em;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.contact-form button.btn-submit {
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.contact-form button.btn-submit:hover {
+    background: #45a049;
+}
+.contact-button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #28a745; /* Green color */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: #218838; /* Darker green on hover */
+}

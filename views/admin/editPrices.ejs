@@ -1,21 +1,21 @@
-<%- include('../includes.header', { title: 'Edit Prices' }) %>
+<%- include('../includes/header', { title: 'Edit Prices' }) %>
 
-<div class="container">
-    <h1>Edit Membership Plan</h1>
-    <form action="/admin/edit-prices/<%= price._id %>" method="POST">
-        <div>
-            <label for="plan">Plan Name:</label>
-            <input type="text" id="plan" name="plan" value="<%= price.plan %>" required>
+<div class="form-container">
+    <h1 class="form-title">Edit Membership Plan</h1>
+    <form action="/admin/edit-prices/<%= price._id %>" method="POST" class="form-content">
+        <div class="form-group">
+            <label for="plan" class="form-label">Plan Name:</label>
+            <input type="text" id="plan" name="plan" class="form-input" value="<%= price.plan %>" required>
         </div>
-        <div>
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" required><%= price.description %></textarea>
+        <div class="form-group">
+            <label for="description" class="form-label">Description:</label>
+            <textarea id="description" name="description" class="form-input" required><%= price.description %></textarea>
         </div>
-        <div>
-            <label for="price">Price:</label>
-            <input type="number" id="price" name="price" value="<%= price.price %>" required>
+        <div class="form-group">
+            <label for="price" class="form-label">Price:</label>
+            <input type="number" id="price" name="price" class="form-input" value="<%= price.price %>" required>
         </div>
-        <button type="submit" class="btn">Update Plan</button>
+        <button type="submit" class="form-btn">Update Plan</button>
     </form>
 </div>
 

@@ -3,7 +3,7 @@ const passport = require("passport");
 const User = require("../models/User");
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
-const TokenModel = require("../models/tokenModel");
+const TokenModel = require("../models/TokenModel");
 
 // Setup email transporter
 const transporter = nodemailer.createTransport({
@@ -18,7 +18,9 @@ const transporter = nodemailer.createTransport({
 exports.getLoginRegisterPage = (req, res) => {
   res.render("pages/login-register", {
     title: "Login/Register",
-    errors: req.flash("error"),
+    success_msg: req.flash("success_msg"),
+    error_msg: req.flash("error_msg"),
+    error: req.flash("error"),
   });
 };
 
@@ -94,7 +96,7 @@ exports.register = async (req, res) => {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error("Error sending email:", error);
-        req.flash("error", "Error sending verification email");
+        req.flash("error_msg", "Error sending verification email");
         return res.redirect("/auth/login-register");
       } else {
         console.log("Verification email sent:", info.response);
@@ -107,7 +109,8 @@ exports.register = async (req, res) => {
     });
   } catch (err) {
     console.error("Error during registration:", err);
-    res.status(500).send("Server error");
+    req.flash("error_msg", "Server error occurred during registration.");
+    res.redirect("/auth/login-register");
   }
 };
 
@@ -117,18 +120,22 @@ exports.login = (req, res, next) => {
     successRedirect: "/",
     failureRedirect: "/auth/login-register",
     failureFlash: true,
+    successFlash: 'Welcome!' 
   })(req, res, next);
 };
 
 // Logout user
-exports.logout = (req, res, next) => {
-  req.logout((err) => {
+exports.logout = (req, res) => {
+  req.session.destroy((err) => {
     if (err) {
       console.error("Error logging out:", err);
-      return next(err);
+      req.flash("error_msg", "An error occurred while logging out.");
+      return res.redirect("/");
     }
-    req.flash("success_msg", "You are logged out");
-    res.redirect("/auth/login-register");
+    req.logout(() => {
+      req.flash("success_msg", "You have successfully logged out.");
+      res.redirect("/auth/login-register");
+    });
   });
 };
 
@@ -142,7 +149,7 @@ exports.verifyEmail = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      req.flash("error", "Invalid verification link.");
+      req.flash("error_msg", "Invalid verification link.");
       return res.redirect("/auth/login-register");
     }
 
@@ -154,7 +161,7 @@ exports.verifyEmail = async (req, res) => {
     const tokenDoc = await TokenModel.findOne({ token });
 
     if (!tokenDoc) {
-      req.flash("error", "Invalid or expired token.");
+      req.flash("error_msg", "Invalid or expired token.");
       return res.redirect("/auth/login-register");
     }
 
@@ -169,6 +176,7 @@ exports.verifyEmail = async (req, res) => {
     res.redirect("/auth/login-register");
   } catch (err) {
     console.error("Error verifying email:", err);
-    res.status(500).send("Server error");
+    req.flash("error_msg", "Server error occurred during email verification.");
+    res.redirect("/auth/login-register");
   }
 };

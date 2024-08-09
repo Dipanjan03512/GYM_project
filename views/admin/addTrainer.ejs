@@ -1,25 +1,25 @@
 <%- include('../includes/header', { title: 'Add Trainer' }) %>
 
-<div class="container">
-    <h1>Add Trainer</h1>
-    <form action="/admin/addTrainer" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+<div class="form-container">
+    <h1 class="form-title">Add Trainer</h1>
+    <form action="/admin/addTrainer" method="POST" enctype="multipart/form-data" class="form-content">
+        <div class="form-group">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" id="name" name="name" class="form-input" required>
         </div>
-        <div>
-            <label for="specialty">Specialty:</label>
-            <input type="text" id="specialty" name="specialty" required>
+        <div class="form-group">
+            <label for="specialty" class="form-label">Specialty:</label>
+            <input type="text" id="specialty" name="specialty" class="form-input" required>
         </div>
-        <div>
-            <label for="bio">Bio:</label>
-            <textarea id="bio" name="bio" required></textarea>
+        <div class="form-group">
+            <label for="bio" class="form-label">Bio:</label>
+            <textarea id="bio" name="bio" class="form-input" required></textarea>
         </div>
-        <div>
-            <label for="photo">Photo:</label>
-            <input type="file" id="photo" name="photo">
+        <div class="form-group">
+            <label for="image" class="form-label">Photo:</label>
+            <input type="file" id="image" name="image" class="form-input">
         </div>
-        <button type="submit" class="btn">Add Trainer</button>
+        <button type="submit" class="form-btn">Add Trainer</button>
     </form>
 </div>
 

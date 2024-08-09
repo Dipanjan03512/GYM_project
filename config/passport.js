@@ -20,7 +20,7 @@ module.exports = function(passport) {
                     return done(null, false, { message: 'Password incorrect' });
                 }
             } catch (err) {
-                console.log(err);
+                console.error('Error during authentication:', err);
                 return done(err);
             }
         })
@@ -33,9 +33,13 @@ module.exports = function(passport) {
     passport.deserializeUser(async (id, done) => {
         try {
             const user = await User.findById(id);
-            done(null, user);
+            if (!user) {
+                return done(null, false);
+            }
+            return done(null, user);
         } catch (err) {
-            done(err, null);
+            console.error('Error deserializing user:', err);
+            return done(err);
         }
     });
 };

@@ -13,8 +13,8 @@ const deleteImageFile = (filePath) => {
 // Centralized error handling function
 const handleError = (res, error, message) => {
     console.error(message, error);
-    req.flash('error', message);
-    res.status(500).send('Server Error');
+    req.flash('error', message); // Fixed: Should use req.flash instead of res.flash
+    res.status(500).redirect('/admin/dashboard'); // Redirect to avoid exposing error details
 };
 
 // Render the dashboard with prices and trainers
@@ -58,11 +58,9 @@ exports.postAddPrice = async (req, res) => {
             image
         });
 
-        const savedPrice = await newPrice.save();
-        if (savedPrice) {
-            req.flash('success_msg', 'Price added successfully');
-            res.redirect('/admin/dashboard');
-        }
+        await newPrice.save();
+        req.flash('success_msg', 'Price added successfully');
+        res.redirect('/admin/dashboard');
     } catch (error) {
         handleError(res, error, 'Error adding price:');
     }
@@ -89,7 +87,11 @@ exports.getEditPrice = async (req, res) => {
 exports.postEditPrice = async (req, res) => {
     try {
         const { type, description, amount } = req.body;
-        const updatedData = { type, description, amount };
+        const updatedData = { 
+            type: type.toLowerCase(), 
+            description: description.toLowerCase(), 
+            amount 
+        };
 
         if (req.file) {
             const oldPrice = await Price.findById(req.params.id);

@@ -3,6 +3,12 @@
 <div class="container">
   <h1 class="dashboard-title">Dashboard</h1>
 
+  <!-- Buttons for Actions -->
+  <div class="dashboard-actions">
+    <a href="/add-Prices" class="btn btn-primary">Add Price</a>
+    <a href="/add-Trainer" class="btn btn-primary">Add Trainer</a>
+  </div>
+
   <h2 class="section-title">Prices</h2>
   <table class="dashboard-table">
     <thead>
@@ -23,7 +29,7 @@
         </td>
         <td>
           <a href="/admin/editPrices/<%= price._id %>" class="btn btn-edit">Edit</a>
-          <form action="/admin/deletePrice/<%= price._id %>" method="POST" class="inline-form">
+          <form action="/admin/deletePrice/<%= price._id %>" method="GET" class="inline-form">
             <button type="submit" class="btn btn-danger">Delete</button>
           </form>
         </td>
@@ -52,7 +58,7 @@
         </td>
         <td>
           <a href="/admin/editTrainer/<%= trainer._id %>" class="btn btn-edit">Edit</a>
-          <form action="/admin/deleteTrainer/<%= trainer._id %>" method="POST" class="inline-form">
+          <form action="/admin/deleteTrainer/<%= trainer._id %>" method="GET" class="inline-form">
             <button type="submit" class="btn btn-danger">Delete</button>
           </form>
         </td>

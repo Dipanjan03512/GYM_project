@@ -5,7 +5,6 @@ const flash = require('connect-flash');
 const passport = require('passport');
 const connectDB = require('./config/db');
 const path = require('path');
-const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 
@@ -18,28 +17,29 @@ connectDB();
 // Passport config
 require('./config/passport')(passport);
 
+const app = express();
+
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 // Express session
 app.use(
     session({
-        secret: 'secret',
+        secret: process.env.SESSION_SECRET, // Ensure this is set in your .env file
         resave: true,
         saveUninitialized: true
     })
 );
 
+// Connect flash
+app.use(flash());
+
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
-
-// Connect flash
-app.use(flash());
 
 // Global variables
 app.use((req, res, next) => {

@@ -1,32 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
-const multer = require('multer');
-const upload = multer({ dest: 'uploads/' }); // Adjust according to your multer configuration
+const { ensureAuthenticated } = require('../middleware/authMiddleware');
+const multer = require('../config/multer'); // Assuming you have multer configuration here
 
-// Route for the dashboard
-router.get('/dashboard', adminController.dashboard);
+// Dashboard
+router.get('/dashboard', ensureAuthenticated, adminController.dashboard);
 
-// Route for adding a price
-router.get('/addPrice', adminController.getAddPrice);
-router.post('/addPrice', upload.single('image'), adminController.postAddPrice);
+// Add Price
+router.get('/addPrice', ensureAuthenticated, adminController.getAddPrice);
+router.post('/addPrice', ensureAuthenticated, multer.single('image'), adminController.postAddPrice);
 
-// Route for editing a price
-router.get('/editPrice/:id', adminController.getEditPrice);
-router.post('/editPrice/:id', upload.single('image'), adminController.postEditPrice);
+// Edit Price
+router.get('/editPrice/:id', ensureAuthenticated, adminController.getEditPrice);
+router.post('/editPrice/:id', ensureAuthenticated, multer.single('image'), adminController.postEditPrice);
 
-// Route for deleting a price
-router.delete('/deletePrice/:id', adminController.deletePrice);
+// Delete Price
+router.get('/deletePrice/:id', ensureAuthenticated, adminController.deletePrice);
 
-// Route for adding a trainer
-router.get('/addTrainer', adminController.getAddTrainer);
-router.post('/addTrainer', upload.single('photo'), adminController.postAddTrainer); 
+// Add Trainer
+router.get('/addTrainer', ensureAuthenticated, adminController.getAddTrainer);
+router.post('/addTrainer', ensureAuthenticated, multer.single('image'), adminController.postAddTrainer);
 
-// Route for editing a trainer
-router.get('/editTrainer/:id', adminController.getEditTrainer);
-router.post('/editTrainer/:id', upload.single('image'), adminController.postEditTrainer);
+// Edit Trainer
+router.get('/editTrainer/:id', ensureAuthenticated, adminController.getEditTrainer);
+router.post('/editTrainer/:id', ensureAuthenticated, multer.single('image'), adminController.postEditTrainer);
 
-// Route for deleting a trainer
-router.delete('/deleteTrainer/:id', adminController.deleteTrainer);
+// Delete Trainer
+router.get('/deleteTrainer/:id', ensureAuthenticated, adminController.deleteTrainer);
 
 module.exports = router;

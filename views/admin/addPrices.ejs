@@ -1,25 +1,25 @@
 <%- include('../includes/header', { title: 'Add Prices' }) %>
 
-<div class="container">
-    <h1>Add Membership Plan</h1>
-    <form action="/admin/addPrice" method="POST" enctype="multipart/form-data">
-        <div>
-            <label for="type">Plan Name:</label>
-            <input type="text" id="type" name="type" required>
+<div class="form-container">
+    <h1 class="form-title">Add Membership Plan</h1>
+    <form action="/admin/addPrice" method="POST" enctype="multipart/form-data" class="form-content">
+        <div class="form-group">
+            <label for="type" class="form-label">Plan Name:</label>
+            <input type="text" id="type" name="type" class="form-input" required>
         </div>
-        <div>
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" required></textarea>
+        <div class="form-group">
+            <label for="description" class="form-label">Description:</label>
+            <textarea id="description" name="description" class="form-input" required></textarea>
         </div>
-        <div>
-            <label for="amount">Price:</label>
-            <input type="number" id="amount" name="amount" required>
+        <div class="form-group">
+            <label for="amount" class="form-label">Price:</label>
+            <input type="number" id="amount" name="amount" class="form-input" required>
         </div>
-        <div>
-            <label for="image">Image:</label>
-            <input type="file" id="image" name="image">
+        <div class="form-group">
+            <label for="image" class="form-label">Image:</label>
+            <input type="file" id="image" name="image" class="form-input">
         </div>
-        <button type="submit" class="btn">Add Plan</button>
+        <button type="submit" class="form-btn">Add Plan</button>
     </form>
 </div>
 

@@ -1,4 +1,6 @@
 const User = require('../models/User');
+const Price = require('../models/Price');
+const Trainer = require('../models/Trainer');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
@@ -71,12 +73,26 @@ exports.login = async (req, res) => {
     }
 };
 
-exports.getTrainersPage = (req, res) => {
-    res.render('pages/trainers');
+exports.getTrainersPage = async (req, res) => {
+    try {
+        const trainers = await Trainer.find();
+        console.log('Trainers:', trainers); 
+        res.render('pages/trainers', { title: 'Trainers', trainers });
+    } catch (error) {
+        console.error('Error fetching trainers:', error); 
+        res.status(500).send('Server Error');
+    }
 };
 
-exports.getPricesPage = (req, res) => {
-    res.render('pages/prices');
+exports.getPricesPage = async (req, res) => {
+    try {
+        const prices = await Price.find();
+        console.log('Prices:', prices); 
+        res.render('pages/prices', { title: 'Prices', prices });
+    } catch (error) {
+        console.error('Error fetching prices:', error); 
+        res.status(500).send('Server Error');
+    }
 };
 
 exports.getAddTrainerPage = (req, res) => {
@@ -86,6 +102,28 @@ exports.getAddTrainerPage = (req, res) => {
 exports.getAddPricesPage = (req, res) => {
     res.render('admin/addPrices');
 };
+
 exports.getloginregister = (req, res) => {
-    res.render('pages/login-register')
-}
+    res.render('pages/login-register');
+};
+
+// Add the getAboutPage method
+exports.getAboutPage = async (req, res) => {
+    try {
+        const trainers = await Trainer.find(); // Fetch trainers data
+        res.render('pages/about', { title: 'About Us', trainers });
+    } catch (error) {
+        console.error('Error fetching trainers for About Us page:', error);
+        res.status(500).send('Server Error');
+    }
+};
+exports.handleContactForm = async (req, res) => {
+    const { name, email, message } = req.body;
+    try {
+        console.log(`Contact form submitted by ${name} (${email}): ${message}`);
+        res.redirect('/thankyou');
+    } catch (error) {
+        console.error('Error handling contact form:', error);
+        res.status(500).send('Server Error');
+    }
+};

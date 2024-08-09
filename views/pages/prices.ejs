@@ -3,6 +3,20 @@
 <main>
     <div class="container">
         <h1>Our Pricing Plans</h1>
+        <div class="prices-container">
+            <% prices.forEach(price => { %>
+                <div class="price-card">
+                    <% if (price.image) { %>
+                        <img src="/uploads/<%= price.image %>" alt="Price Image" class="price-image">
+                    <% } %>
+                    <div class="price-info">
+                        <h3><%= price.type %></h3>
+                        <p><%= price.description %></p>
+                        <p><%= price.amount %>/-</p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
     </div>
 </main>
 
