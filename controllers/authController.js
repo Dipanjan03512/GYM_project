@@ -3,7 +3,7 @@ const passport = require("passport");
 const User = require("../models/User");
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
-const TokenModel = require("../models/TokenModel");
+const TokenModel = require("../models/tokenModel");
 
 // Setup email transporter
 const transporter = nodemailer.createTransport({
