@@ -1,0 +1,11 @@
+<%- include('../includes/header', { title: 'Purchase Confirmation' }) %>
+
+<main>
+    <div class="container">
+        <h1>Thank You for Your Purchase!</h1>
+        <p>You have successfully purchased the <strong><%= type %></strong> plan for <strong><%= amount %>/-</strong>.</p>
+        <a href="/prices" class="back-to-prices">Back to Pricing</a>
+    </div>
+</main>
+
+<%- include('../includes/footer') %>

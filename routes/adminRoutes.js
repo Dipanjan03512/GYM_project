@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
 const { ensureAuthenticated } = require('../middleware/authMiddleware');
-const multer = require('../config/multer'); // Assuming you have multer configuration here
+const multer = require('../config/multer');
 
 // Dashboard
 router.get('/dashboard', ensureAuthenticated, adminController.dashboard);

@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
@@ -48,7 +47,7 @@ app.use((req, res, next) => {
     res.locals.error = req.flash('error');
     res.locals.user = req.user || null;
     next();
-});
+});   
 
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));

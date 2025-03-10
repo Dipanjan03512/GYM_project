@@ -1,5 +1,6 @@
 const Price = require('../models/Price');
 const Trainer = require('../models/Trainer');
+const User = require('../models/User');
 const path = require('path');
 const fs = require('fs');
 
@@ -9,27 +10,29 @@ const deleteImageFile = (filePath) => {
         fs.unlinkSync(filePath);
     }
 };
-
+    
 // Centralized error handling function
 const handleError = (res, error, message) => {
     console.error(message, error);
     req.flash('error', message); // Fixed: Should use req.flash instead of res.flash
     res.status(500).redirect('/admin/dashboard'); // Redirect to avoid exposing error details
 };
-
+  
 // Render the dashboard with prices and trainers
 exports.dashboard = async (req, res) => {
     try {
-        const prices = await Price.find();
-        const trainers = await Trainer.find();
+        const prices = await Price.find({});
+        const trainers = await Trainer.find({});
+        const users = await User.find({});
 
         res.render('admin/dashboard', {
-            title: 'Dashboard',
             prices,
-            trainers
+            trainers,
+            users,
         });
-    } catch (error) {
-        handleError(res, error, 'Error fetching data for dashboard:');
+    } catch (err) {
+        console.error(err);
+        res.redirect('/error');
     }
 };
 
@@ -69,17 +72,19 @@ exports.postAddPrice = async (req, res) => {
 // Render the page to edit a price
 exports.getEditPrice = async (req, res) => {
     try {
-        const price = await Price.findById(req.params.id);
+        const priceId = req.params.id;
+        const price = await Price.findById(priceId);
+
         if (!price) {
-            return res.status(404).send('Price not found');
+            req.flash('error', 'Price not found.');
+            return res.redirect('/admin/dashboard'); 
         }
 
-        res.render('admin/editPrice', {
-            title: 'Edit Price',
-            price
-        });
-    } catch (error) {
-        handleError(res, error, 'Error fetching price for editing:');
+        res.render('admin/editPrices', { price }); 
+    } catch (err) {
+        console.error(err);
+        req.flash('error', 'An error occurred.');
+        res.redirect('/admin/dashboard'); 
     }
 };
 
@@ -99,7 +104,7 @@ exports.postEditPrice = async (req, res) => {
                 deleteImageFile(path.join(__dirname, '..', 'uploads', oldPrice.image));
             }
             updatedData.image = req.file.filename;
-        }
+        }  
 
         await Price.findByIdAndUpdate(req.params.id, updatedData);
         req.flash('success_msg', 'Price updated successfully');

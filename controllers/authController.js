@@ -3,7 +3,7 @@ const passport = require("passport");
 const User = require("../models/User");
 const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
-const TokenModel = require("../models/TokenModel");
+const TokenModel = require("../models/tokenModel");
 
 // Setup email transporter
 const transporter = nodemailer.createTransport({
@@ -129,11 +129,11 @@ exports.logout = (req, res) => {
   req.session.destroy((err) => {
     if (err) {
       console.error("Error logging out:", err);
-      req.flash("error_msg", "An error occurred while logging out.");
+      // req.flash("error_msg", "An error occurred while logging out.");
       return res.redirect("/");
     }
     req.logout(() => {
-      req.flash("success_msg", "You have successfully logged out.");
+      // req.flash("success_msg", "You have successfully logged out.");
       res.redirect("/auth/login-register");
     });
   });

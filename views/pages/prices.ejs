@@ -7,12 +7,18 @@
             <% prices.forEach(price => { %>
                 <div class="price-card">
                     <% if (price.image) { %>
-                        <img src="/uploads/<%= price.image %>" alt="Price Image" class="price-image">
+                        <img src="/uploads/<%= price.image %>" alt="<%= price.type %> Image" class="price-image">
                     <% } %>
                     <div class="price-info">
                         <h3><%= price.type %></h3>
                         <p><%= price.description %></p>
                         <p><%= price.amount %>/-</p>
+                        <!-- Purchase button -->
+                        <form action="/purchased" method="GET">
+                            <input type="hidden" name="type" value="<%= price.type %>">
+                            <input type="hidden" name="amount" value="<%= price.amount %>">
+                            <button type="submit" class="purchase-button">Purchase</button>
+                        </form>
                     </div>
                 </div>
             <% }) %>
